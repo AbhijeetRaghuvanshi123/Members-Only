@@ -31,7 +31,9 @@ const validateSignup = [
       const user = await userQuery.findUserByEmail(value);
       if(user){
         throw new Error('Email already in use!');
-      } 
+      }
+      
+      return true;
     }),
 
   body("password")

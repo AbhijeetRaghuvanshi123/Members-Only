@@ -13,6 +13,12 @@ const findUserByEmail = async (email) => {
     return result.rows[0];
 }
 
-const userQuery = { addUser, findUserByEmail };
+const joinClub = async (id) => {
+    const result = await pool.query(`UPDATE users SET is_member = TRUE WHERE id = $1`, [id]);
+
+    return result.rows[0];
+} 
+
+const userQuery = { addUser, findUserByEmail, joinClub };
 
 export default userQuery;

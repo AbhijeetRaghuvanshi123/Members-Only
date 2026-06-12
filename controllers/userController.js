@@ -15,4 +15,13 @@ const signUpGET = (req, res) => {
     res.render('signup', { title: 'Sign Up', formData: {firstname : '', lastname: '', email: '', password: '', confirmpassword: ''}});
 }
 
-export {signUpPOST, signUpGET};
+const joinClubGET = (req, res) => {
+    res.render('clubjoin', { title: 'Join Club', formData: {passcode : ''}});
+}
+
+const joinClubPOST = async (req, res) => {
+    const id = 2;
+    await userQuery.joinClub(id);
+}
+
+export {signUpPOST, signUpGET, joinClubGET, joinClubPOST};
