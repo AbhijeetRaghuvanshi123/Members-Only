@@ -7,6 +7,12 @@ const addUser = async ({firstname, lastname, email, passwordHash}) => {
     return result.rows[0];
 }
 
-const userQuery = { addUser };
+const findUserByEmail = async (email) => {
+    const result = await pool.query(`SELECT * FROM users WHERE email = $1;`, [email]);
+
+    return result.rows[0];
+}
+
+const userQuery = { addUser, findUserByEmail };
 
 export default userQuery;

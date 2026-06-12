@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import userQuery from "../db/userQuery.js";
 
 const validateSignup = [
   body("firstname")
@@ -25,7 +26,13 @@ const validateSignup = [
     .withMessage("Email is required")
     .isEmail()
     .withMessage("Please enter a valid email address")
-    .normalizeEmail(),
+    .normalizeEmail()
+    .custom( async (value) => {
+      const user = await userQuery.findUserByEmail(value);
+      if(user){
+        throw new Error('Email already in use!');
+      } 
+    }),
 
   body("password")
     .notEmpty()
