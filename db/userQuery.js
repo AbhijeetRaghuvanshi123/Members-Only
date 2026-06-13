@@ -19,6 +19,12 @@ const joinClub = async (id) => {
     return result.rows[0];
 } 
 
-const userQuery = { addUser, findUserByEmail, joinClub };
+const findUserById = async (id) => {
+    const result = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+
+    return result.rows[0];
+}
+
+const userQuery = { addUser, findUserByEmail, joinClub, findUserById };
 
 export default userQuery;

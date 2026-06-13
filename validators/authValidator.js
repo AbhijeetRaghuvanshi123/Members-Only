@@ -27,12 +27,12 @@ const validateSignup = [
     .isEmail()
     .withMessage("Please enter a valid email address")
     .normalizeEmail()
-    .custom( async (value) => {
+    .custom(async (value) => {
       const user = await userQuery.findUserByEmail(value);
-      if(user){
+      if (user) {
         throw new Error('Email already in use!');
       }
-      
+
       return true;
     }),
 
@@ -53,4 +53,25 @@ const validateSignup = [
     .withMessage("Passwords do not match"),
 ];
 
-export default validateSignup;
+const validateLogIn = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Please enter a valid email address")
+    .normalizeEmail()
+    .custom(async (value) => {
+      const user = await userQuery.findUserByEmail(value);
+      if (!user) {
+        throw new Error('Email doesnt exist! Sign Up?');
+      }
+
+      return true;
+    }),
+  body("password")
+    .notEmpty()
+    .withMessage("Password is required")
+]
+
+export { validateLogIn, validateSignup};

@@ -3,21 +3,27 @@ import pool from './config/database.js';
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import userRouter from './routes/userRoutes.js';
+import authRouter from './routes/authRoutes.js';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
+import messageRouter from './routes/messageRoutes.js';
+import './config/passport.js'
+import passport from 'passport';
 
-const pgSession = connectPgSimple(session);
-
+//variable setup
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DAY = 24 * 60 * 60 * 1000; //Hrs * Minutes * Seconds * ms;
 
+//app setup
 const app = express();
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({extended: false}));
 
+
+//session setup
+const pgSession = connectPgSimple(session);
 app.use(session({
     store: new pgSession({
         pool: pool,
@@ -31,12 +37,20 @@ app.use(session({
     }
 }))
 
-app.use(express.urlencoded({extended: false}));
+//auth setup
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/', userRouter);
 
+//router setup
+app.use('/', authRouter);
+app.use('/messages', messageRouter);
+
+//error handling setup
+
+
+//server start setup
 const PORT = process.env.PORT;
-
 app.listen(PORT, async (error) => {
     if(error){
         throw error;
