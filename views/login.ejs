@@ -10,10 +10,10 @@
     <%- include('partials/errors.ejs') %>
     <form action="/login" method="POST">
         <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<%= formData.email %>">
+        <input type="email" name="email" id="email" value="<%= formData.email || '' %>">
 
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" value="<%= formData.password %>">
+        <input type="password" name="password" id="password" value="<%= formData.password || '' %>">
 
         <button type="submit">Log In</button>
     </form>

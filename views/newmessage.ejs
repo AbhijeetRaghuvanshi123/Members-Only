@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Message</title>
+    <title><%= title %></title>
 </head>
 <body>
-    <h1>Write New Message</h1>
+    <h1><%= title %></h1>
+    <%- include('partials/errors.ejs') %>
+    <form action="/messages/new" method="POST">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="<%= formData.title || '' %>">
+
+        <label for="content">Write Content</label>
+        <textarea name="content" id="content" placeholder="Write your message..."><%= formData.content || '' %></textarea>
+
+        <button type="submit">Post Message</button>
+    </form>
 </body>
 </html>

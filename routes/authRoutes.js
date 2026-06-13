@@ -4,13 +4,14 @@ import {handleSignUpValidationErrors, handleLoginValidationErrors} from '../midd
 import { validateLogIn, validateSignup} from '../validators/authValidator.js'
 import validateClubPasscode from '../validators/clubpassValidator.js';
 import handlePasscodeErrors from '../middleware/clubpasscodeErrors.js';
+import ensureAuthenticated from '../middleware/ensureAuthentication.js';
 const authRouter = Router();
 
 authRouter.get('/signup', signUpGET);
 authRouter.post('/signup', validateSignup, handleSignUpValidationErrors, signUpPOST);
 
-authRouter.get('/joinclub', joinClubGET);
-authRouter.post('/joinclub', validateClubPasscode, handlePasscodeErrors, joinClubPOST);
+authRouter.get('/joinclub', ensureAuthenticated, joinClubGET);
+authRouter.post('/joinclub', ensureAuthenticated ,validateClubPasscode, handlePasscodeErrors, joinClubPOST);
 
 authRouter.get('/login', logInGET);
 authRouter.post('/login', validateLogIn, handleLoginValidationErrors, loginPOST);

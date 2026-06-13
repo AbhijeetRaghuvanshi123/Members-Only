@@ -10,7 +10,7 @@
     <%- include('partials/errors.ejs') %>
     <form action="/joinclub" method="POST">
         <label for="passcode">Enter Club Passcode</label>
-        <input type="password" name="passcode" id="passcode" value="<%= formData.passcode %>">
+        <input type="password" name="passcode" id="passcode" value="<%= formData.passcode || '' %>">
         <button type="submit">Join Club</button>
     </form>
 </body>
