@@ -9,6 +9,7 @@ import connectPgSimple from 'connect-pg-simple';
 import messageRouter from './routes/messageRoutes.js';
 import './config/passport.js'
 import passport from 'passport';
+import { globalErrors, pageNotFoundError } from './middleware/globalErrors.js';
 
 //variable setup
 const __filename = fileURLToPath(import.meta.url);
@@ -46,9 +47,8 @@ app.use(passport.session());
 app.use('/user', authRouter);
 app.use('/', messageRouter);
 
-app.use((req, res) => {
-    res.status(404).render('404error');
-})
+app.use(pageNotFoundError);
+app.use(globalErrors);
 
 //error handling setup
 
