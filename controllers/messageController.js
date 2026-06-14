@@ -10,19 +10,25 @@ const newMessagePOST = async (req, res) => {
 
     await messageQuery.addNewMessage({ title, content, author_id });
 
-    res.redirect('/messages/all');
+    res.redirect('/');
 }
 
 const allMessageGET = async (req, res) => {
     if (req.user.is_member) {
         const messages = await messageQuery.getAllMessages();
 
-        return res.send(messages);
+        return res.render('home', {title: 'All Posts', messages: messages});
     }
 
     const messages = await messageQuery.allMessagesProtected();
 
-    res.send(messages);
+    res.render('home', {title: 'All Posts', messages: messages});
 }
 
-export { newMessageGET, newMessagePOST, allMessageGET };
+const deletMessageGET = async (req, res) => {
+    await messageQuery.deleteMessage(req.query.id);
+
+    res.redirect('/');
+}
+
+export { newMessageGET, newMessagePOST, allMessageGET, deletMessageGET };

@@ -8,7 +8,7 @@
 <body>
     <h1><%= title %></h1>
     <%- include('partials/errors.ejs') %>
-    <form action="/signup" method="post">
+    <form action="/user/signup" method="post">
         <label for="firstname">First Name: </label>
         <input type="text" name="firstname" id="firstname" value="<%= formData.firstname || '' %>">
 
@@ -26,6 +26,6 @@
 
         <button type="submit">Sign Up</button>
     </form>
-    <h2>Already have an Account? <a href="/login">Log In</a></h2>
+    <h2>Already have an Account? <a href="/user/login">Log In</a></h2>
 </body>
 </html>

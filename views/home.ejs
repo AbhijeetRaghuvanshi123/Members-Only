@@ -6,6 +6,34 @@
     <title>All Posts</title>
 </head>
 <body>
-    
+    <h1><%= title %></h1>
+    <% if(messages[0]){ %>
+        <ul>
+            <% messages.forEach(message => { %>
+                <li>
+                    <% if(message.author){ %>
+                        <h2>Author: <%= message.author %></h2>
+                    <% } %>
+                    <h3>Title: <%= message.title %></h3>
+                    <p><%= message.content %></p>
+                    <br>
+                    <% if (message.created_at) { %>
+                        <p><%= message.created_at %></p>
+                    <% } %>
+
+                    <a href="/delete?id=<%= message.id %>">Delete Post</a>
+                </li>
+            <% }); %>
+        </ul>
+        <% if(!messages[0].author){ %>
+            <a href="/user/joinclub">Join Club to see author and time of creation</a>
+        <% } %>
+
+        <a href="/new">Make a Post</a>
+    <% }else{ %>
+        No Post Avilable!
+        <a href="/new">Make a Post</a>
+    <% } %>
+    <a href="/user/logout">Log out</a>
 </body>
 </html>

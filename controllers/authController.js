@@ -9,7 +9,7 @@ const signUpPOST = async (req, res) => {
 
     await userQuery.addUser({firstname, lastname, email, passwordHash});
 
-    res.redirect('/login');
+    res.redirect('/user/login');
 }
 
 const signUpGET = (req, res) => {
@@ -20,7 +20,7 @@ const logInGET = (req, res) => {
     res.render('login', { title: 'Log In', formData: {}});
 }
 
-const loginPOST = passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: '/messages/new'});
+const loginPOST = passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: '/new'});
 
 const joinClubGET = (req, res) => {
     res.render('clubjoin', { title: 'Join Club', formData: {}});
@@ -30,7 +30,24 @@ const joinClubPOST = async (req, res) => {
     const id = req.user.id;
     await userQuery.joinClub(id);
 
-    res.redirect('/messages/all');
+    res.redirect('/');
 }
 
-export {signUpPOST, signUpGET, joinClubGET, joinClubPOST, logInGET, loginPOST};
+const joinAdminPOST = async (req, res) => {
+    const id = req.user.id;
+    await userQuery.joinAdmin(id);
+
+    res.redirect('/');
+}
+
+const logoutGET = async (req, res, next) => {
+    req.logout((error) => {
+        if(error){
+            return next(error);
+        }
+
+        res.redirect('/user/login')
+    })
+}
+
+export {signUpPOST, signUpGET, joinClubGET, joinClubPOST, logInGET, loginPOST, logoutGET, joinAdminPOST};

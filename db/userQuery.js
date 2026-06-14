@@ -25,6 +25,12 @@ const findUserById = async (id) => {
     return result.rows[0];
 }
 
-const userQuery = { addUser, findUserByEmail, joinClub, findUserById };
+const joinAdmin = async (id) => {
+    const result = await pool.query(`UPDATE users SET is_admin = TRUE WHERE id = $1`, [id]);
+
+    return result.rows[0];
+}
+
+const userQuery = { addUser, findUserByEmail, joinClub, findUserById, joinAdmin };
 
 export default userQuery;

@@ -43,8 +43,12 @@ app.use(passport.session());
 
 
 //router setup
-app.use('/', authRouter);
-app.use('/messages', messageRouter);
+app.use('/user', authRouter);
+app.use('/', messageRouter);
+
+app.use((req, res) => {
+    res.status(404).render('404error');
+})
 
 //error handling setup
 

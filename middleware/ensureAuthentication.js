@@ -6,4 +6,12 @@ const ensureAuthenticated = (req, res, next) => {
     res.render('notauth');
 }
 
-export default ensureAuthenticated;
+const isAdmin = (req, res, next) => {
+    if(req.user.is_admin){
+        return next();
+    }
+
+    res.render('notadmin');
+}
+
+export {ensureAuthenticated, isAdmin };

@@ -7,7 +7,15 @@ const addNewMessage = async ({title, content, author_id}) => {
 }
 
 const getAllMessages = async () => {
-    const result = await pool.query('SELECT * FROM messages');
+    const result = await pool.query(`SELECT 
+                                        CONCAT(users.firstname, ' ', users.lastname) AS author, 
+                                        messages.id, 
+                                        messages.title, 
+                                        messages.content, 
+                                        messages.created_at 
+                                    FROM users 
+                                    INNER JOIN messages 
+                                    ON users.id = messages.author_id;`);
 
     return result.rows;
 }
@@ -18,6 +26,12 @@ const allMessagesProtected = async () => {
     return result.rows;
 }
 
-const messageQuery = { addNewMessage, getAllMessages, allMessagesProtected};
+const deleteMessage = async (id) => {
+    const result = await pool.query('DELETE FROM messages WHERE id = $1', [id]);
+
+    return result.rows[0];
+}
+
+const messageQuery = { addNewMessage, getAllMessages, allMessagesProtected, deleteMessage};
 
 export default messageQuery;

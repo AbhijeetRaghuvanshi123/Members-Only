@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Permission</title>
+</head>
+<body>
+    <h1>Permission Required</h1>
+    <h2>You dont have permission.</h2>
+    <form action="/user/joinadmin" method="post">
+        <%- include('partials/errors.ejs') %>
+        <label for="passcode">Enter Admin Key to become Admin</label>
+        <input type="password" name="passcode" id="passcode">
+
+        <button type="submit">Verify</button>
+    </form>
+    <a href="/">Cancel</a>
+</body>
+</html>
