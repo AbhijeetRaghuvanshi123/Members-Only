@@ -1,20 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No Permission</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Permission</title>
+  <%- include('partials/styles.ejs') %>
+  <style>
+    .perm-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background: #1f0e0e;
+      border: 1px solid #5a2020;
+      color: #e07070;
+      margin-bottom: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-    <h1>Permission Required</h1>
-    <h2>You dont have permission.</h2>
-    <form action="/user/joinadmin" method="post">
-        <%- include('partials/errors.ejs') %>
-        <label for="passcode">Enter Admin Key to become Admin</label>
-        <input type="password" name="passcode" id="passcode">
 
-        <button type="submit">Verify</button>
-    </form>
-    <a href="/">Cancel</a>
+  <div class="fortress-wrap">
+    <div class="fortress-header">
+      <div class="fortress-crest" style="border-color:#a03030;">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="fill:#a03030;">
+          <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z"/>
+        </svg>
+      </div>
+      <p class="page-title" style="color:#e8e4d8;">Forbidden Chamber</p>
+      <h1 style="color:#e07070;">Permission Required</h1>
+    </div>
+
+    <div class="fortress-card" style="border-top-color:#a03030;">
+      <span class="perm-badge">Access Denied</span>
+
+      <p style="font-size:13px; color:#777; letter-spacing:0.04em; margin-bottom:1.5rem; line-height:1.6;">
+        You do not hold the rank to enter this chamber.
+        Administrators may present their master key below to verify command authority.
+      </p>
+
+      <%- include('partials/errors.ejs') %>
+
+      <form action="/user/joinadmin" method="post">
+
+        <div class="form-group">
+          <label for="passcode">Admin Master Key</label>
+          <input type="password" name="passcode" id="passcode" placeholder="Master key...">
+        </div>
+
+        <button type="submit" class="castle-btn danger">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          Verify Command Authority
+        </button>
+      </form>
+    </div>
+
+    <p class="footer-links"><a href="/">← Retreat to Safety</a></p>
+  </div>
+
 </body>
 </html>

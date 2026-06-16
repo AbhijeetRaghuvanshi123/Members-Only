@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <%- include('partials/styles.ejs') %>
 </head>
 <body>
-    <h1><%= title %></h1>
-    <%- include('partials/errors.ejs') %>
-    <form action="/new" method="POST">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="<%= formData.title || '' %>">
 
-        <label for="content">Content</label>
-        <textarea name="content" id="content" placeholder="Write your message..."><%= formData.content || '' %></textarea>
+  <div class="fortress-wrap">
+    <div class="fortress-header">
+      <div class="fortress-crest">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+        </svg>
+      </div>
+      <p class="page-title">Members Only Fortress</p>
+      <h1><%= title %></h1>
+    </div>
 
-        <button type="submit">Post Message</button>
-    </form>
-    <a href="/">See All posts</a>
+    <div class="fortress-card">
+      <%- include('partials/errors.ejs') %>
+
+      <form action="/new" method="POST">
+
+        <div class="form-group">
+          <label for="title">Dispatch Title</label>
+          <input type="text" name="title" id="title" value="<%= formData.title || '' %>" placeholder="Subject of your dispatch...">
+        </div>
+
+        <div class="form-group">
+          <label for="content">Message to the Realm</label>
+          <textarea name="content" id="content" placeholder="Write your dispatch..."><%= formData.content || '' %></textarea>
+        </div>
+
+        <button type="submit" class="castle-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          Send Dispatch
+        </button>
+      </form>
+    </div>
+
+    <p class="footer-links"><a href="/">← Return to the Great Hall</a></p>
+  </div>
+
 </body>
 </html>

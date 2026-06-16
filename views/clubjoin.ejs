@@ -1,17 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <%- include('partials/styles.ejs') %>
 </head>
 <body>
-    <h1><%= title %></h1>
-    <%- include('partials/errors.ejs') %>
-    <form action="/user/joinclub" method="POST">
-        <label for="passcode">Enter Club Passcode</label>
-        <input type="password" name="passcode" id="passcode" value="<%= formData.passcode || '' %>">
-        <button type="submit">Join Club</button>
-    </form>
+
+  <div class="fortress-wrap">
+    <div class="fortress-header">
+      <div class="fortress-crest">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 1L9 9H1l6.5 5-2.5 8L12 17l7 5-2.5-8L23 9h-8L12 1z"/>
+        </svg>
+      </div>
+      <p class="page-title">Members Only Fortress</p>
+      <h1>Join the Inner Circle</h1>
+    </div>
+
+    <div class="fortress-card">
+      <p style="font-size:13px; color:#777; letter-spacing:0.04em; margin-bottom:1.5rem; line-height:1.6;">
+        Inner Circle members gain access to author identities and timestamps of all dispatches.
+        Present the secret passcode to claim your rank.
+      </p>
+
+      <%- include('partials/errors.ejs') %>
+
+      <form action="/user/joinclub" method="POST">
+
+        <div class="form-group">
+          <label for="passcode">Club Passcode</label>
+          <input type="password" name="passcode" id="passcode" value="<%= formData.passcode || '' %>" placeholder="Secret phrase...">
+        </div>
+
+        <button type="submit" class="castle-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L9 9H1l6.5 5-2.5 8L12 17l7 5-2.5-8L23 9h-8L12 1z"/></svg>
+          Claim Membership
+        </button>
+      </form>
+    </div>
+
+    <p class="footer-links"><a href="/">← Retreat to the Throne Room</a></p>
+  </div>
+
 </body>
 </html>

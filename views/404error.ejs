@@ -1,12 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Uncharted Territory</title>
+  <%- include('partials/styles.ejs') %>
+  <style>
+    .turret-row {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 2rem;
+    }
+
+    .turret {
+      width: 24px;
+      height: 32px;
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      position: relative;
+    }
+
+    .turret::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 10px;
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-bottom: none;
+    }
+
+    .wall {
+      width: 14px;
+      height: 18px;
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-top: none;
+      align-self: flex-end;
+    }
+
+    .error-code {
+      font-size: 72px;
+      font-weight: 200;
+      color: #2e2e2e;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .error-code span { color: #c9a84c; }
+  </style>
 </head>
 <body>
-    <h1>Page Not Found!</h1>
-    <a href="/">Home</a>
+
+  <div class="fortress-wrap" style="text-align:center;">
+
+    <div class="turret-row" aria-hidden="true">
+      <div class="turret"></div><div class="wall"></div>
+      <div class="turret"></div><div class="wall"></div>
+      <div class="turret"></div><div class="wall"></div>
+      <div class="turret"></div><div class="wall"></div>
+      <div class="turret"></div>
+    </div>
+
+    <p class="error-code"><span>4</span>0<span>4</span></p>
+
+    <div class="fortress-header" style="border-bottom: 1px solid #2e2e2e; padding-bottom:1.5rem; margin-bottom:1.5rem;">
+      <h1>Uncharted Territory</h1>
+      <p style="font-size:11px; color:#555; letter-spacing:0.12em; text-transform:uppercase; margin-top:4px;">Passage Not Found</p>
+    </div>
+
+    <p style="font-size:13px; color:#555; line-height:1.7; margin-bottom:2rem; letter-spacing:0.03em;">
+      This passage does not exist within the fortress walls.<br>
+      You may have taken a wrong turn in the labyrinth.
+    </p>
+
+    <a href="/" style="text-decoration:none;">
+      <button class="castle-btn" style="width:auto; display:inline-flex; margin:0 auto; padding:11px 36px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        Return to Throne Room
+      </button>
+    </a>
+
+  </div>
+
 </body>
 </html>

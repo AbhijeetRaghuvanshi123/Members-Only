@@ -1,31 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <%- include('partials/styles.ejs') %>
 </head>
 <body>
-    <h1><%= title %></h1>
-    <%- include('partials/errors.ejs') %>
-    <form action="/user/signup" method="post">
-        <label for="firstname">First Name: </label>
-        <input type="text" name="firstname" id="firstname" value="<%= formData.firstname || '' %>">
 
-        <label for="lastname">Last Name: </label>
-        <input type="text" name="lastname" id="lastname" value="<%= formData.lastname || '' %>">
+  <div class="fortress-wrap">
+    <div class="fortress-header">
+      <div class="fortress-crest">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 1L3 5v6c0 5.25 3.75 10.15 9 11.25C17.25 21.15 21 16.25 21 11V5L12 1zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm4 8H8v-1c0-1.33 2.67-2 4-2s4 .67 4 2v1z"/>
+        </svg>
+      </div>
+      <p class="page-title">Members Only Fortress</p>
+      <h1>Enlist — Request Entry</h1>
+    </div>
 
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email" value="<%= formData.email || '' %>">
+    <div class="fortress-card">
+      <%- include('partials/errors.ejs') %>
 
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password" value="<%= formData.password || '' %>">
+      <form action="/user/signup" method="post">
 
-        <label for="confirmPassword">Confirm Password: </label>
-        <input type="password" name="confirmPassword" id="confirmPassword" value="<%= formData.confirmPassword || '' %>">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" name="firstname" id="firstname" value="<%= formData.firstname || '' %>" placeholder="Arthur">
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" name="lastname" id="lastname" value="<%= formData.lastname || '' %>" placeholder="Pendragon">
+          </div>
+        </div>
 
-        <button type="submit">Sign Up</button>
-    </form>
-    <h2>Already have an Account? <a href="/user/login">Log In</a></h2>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" name="email" id="email" value="<%= formData.email || '' %>" placeholder="you@fortress.com">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" value="<%= formData.password || '' %>" placeholder="••••••••">
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" value="<%= formData.confirmPassword || '' %>" placeholder="••••••••">
+        </div>
+
+        <button type="submit" class="castle-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.25 3.75 10.15 9 11.25C17.25 21.15 21 16.25 21 11V5L12 1z"/></svg>
+          Request Entry
+        </button>
+      </form>
+    </div>
+
+    <p class="footer-links">Already enlisted? &nbsp;<a href="/user/login">Pass through the gate →</a></p>
+  </div>
+
 </body>
 </html>

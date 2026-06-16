@@ -1,22 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <%- include('partials/styles.ejs') %>
 </head>
 <body>
-    <h1><%= title %></h1>
-    <%- include('partials/errors.ejs') %>
-    <form action="/user/login" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<%= formData.email || '' %>">
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" value="<%= formData.password || '' %>">
+  <div class="fortress-wrap">
+    <div class="fortress-header">
+      <div class="fortress-crest">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+        </svg>
+      </div>
+      <p class="page-title">Members Only Fortress</p>
+      <h1>The Gate — Present Credentials</h1>
+    </div>
 
-        <button type="submit">Log In</button>
-    </form>
-    <h2>Don't have an Account? <a href="/user/signup">Sign Up</a></h2>
+    <div class="fortress-card">
+      <%- include('partials/errors.ejs') %>
+
+      <form action="/user/login" method="POST">
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" name="email" id="email" value="<%= formData.email || '' %>" placeholder="you@fortress.com">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" value="<%= formData.password || '' %>" placeholder="••••••••">
+        </div>
+
+        <button type="submit" class="castle-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+          Pass Through Gate
+        </button>
+      </form>
+    </div>
+
+    <p class="footer-links">No credentials yet? &nbsp;<a href="/user/signup">Enlist here →</a></p>
+  </div>
+
 </body>
 </html>

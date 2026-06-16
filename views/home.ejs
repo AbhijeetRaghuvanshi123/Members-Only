@@ -1,39 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Posts</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Posts</title>
+  <%- include('partials/styles.ejs') %>
+  <style>
+    .great-hall-wrap {
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .hall-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #2e2e2e;
+    }
+
+    .hall-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hall-crest {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 2px solid #c9a84c;
+      background: #1a1a1a;
+      flex-shrink: 0;
+    }
+
+    .hall-crest svg { width: 22px; height: 22px; fill: #c9a84c; }
+
+    .hall-title-block p {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #c9a84c;
+      margin-bottom: 2px;
+    }
+
+    .hall-title-block h1 {
+      font-size: 20px;
+      font-weight: 400;
+      color: #e8e4d8;
+      letter-spacing: 0.03em;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .action-link {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 7px 14px;
+      border: 1px solid #2e2e2e;
+      color: #888;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .action-link:hover { border-color: #c9a84c; color: #c9a84c; }
+
+    .action-link.primary {
+      border-color: #c9a84c;
+      color: #c9a84c;
+    }
+
+    .action-link.primary:hover { background: #c9a84c; color: #0f0f0f; }
+
+    .posts-container {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-top: 3px solid #c9a84c;
+    }
+
+    .post-item {
+      padding: 1.5rem;
+      border-bottom: 1px solid #222;
+      position: relative;
+    }
+
+    .post-item:last-child { border-bottom: none; }
+
+    .post-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+
+    .post-author {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+
+    .post-date {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #444;
+      text-transform: uppercase;
+    }
+
+    .post-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #e8e4d8;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .post-content {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .delete-link {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #5a2020;
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid #3a1515;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .delete-link:hover { border-color: #a03030; color: #e07070; }
+
+    .empty-hall {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: #444;
+    }
+
+    .empty-hall p { font-size: 13px; letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+
+    .join-banner {
+      background: #161208;
+      border: 1px solid #3a2e10;
+      padding: 10px 16px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: #7a6020;
+      text-align: center;
+    }
+
+    .join-banner a { color: #c9a84c; text-decoration: none; }
+    .join-banner a:hover { text-decoration: underline; }
+  </style>
 </head>
-<body>
-    <h1><%= title %></h1>
+<body style="justify-content: flex-start; padding: 2rem 1rem;">
+
+  <div class="great-hall-wrap">
+
+    <div class="hall-header">
+      <div class="hall-header-left">
+        <div class="hall-crest">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+          </svg>
+        </div>
+        <div class="hall-title-block">
+          <p>Members Only Fortress</p>
+          <h1><%= title %></h1>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="/new" class="action-link primary">+ New Dispatch</a>
+        <a href="/user/logout" class="action-link">Log Out</a>
+      </div>
+    </div>
+
     <% if(messages[0]){ %>
-        <ul>
-            <% messages.forEach(message => { %>
-                <li>
-                    <% if(message.author){ %>
-                        <h2>Author: <%= message.author %></h2>
-                    <% } %>
-                    <h3>Title: <%= message.title %></h3>
-                    <p><%= message.content %></p>
-                    <br>
-                    <% if (message.created_at) { %>
-                        <p><%= message.created_at %></p>
-                    <% } %>
 
-                    <a href="/delete?id=<%= message.id %>">Delete Post</a>
-                </li>
-            <% }); %>
+      <% if(!messages[0].author){ %>
+        <div class="join-banner">
+          Author identities and timestamps are concealed — <a href="/user/joinclub">Join the Inner Circle</a> to reveal them.
+        </div>
+      <% } %>
+
+      <div class="posts-container" style="margin-top: 1rem;">
+        <ul style="list-style:none;">
+          <% messages.forEach(message => { %>
+            <li class="post-item">
+              <div class="post-meta-row">
+                <% if(message.author){ %>
+                  <span class="post-author">&#x2726; <%= message.author %></span>
+                <% } else { %>
+                  <span class="post-author" style="color:#333;">&#x2726; [Concealed]</span>
+                <% } %>
+                <% if (message.created_at) { %>
+                  <span class="post-date"><%= message.created_at %></span>
+                <% } %>
+              </div>
+              <h2 class="post-title"><%= message.title %></h2>
+              <p class="post-content"><%= message.content %></p>
+              <div class="post-footer">
+                <a href="/delete?id=<%= message.id %>" class="delete-link">&#x2715; Raze Post</a>
+              </div>
+            </li>
+          <% }); %>
         </ul>
-        <% if(!messages[0].author){ %>
-            <a href="/user/joinclub">Join Club to see author and time of creation</a>
-        <% } %>
+      </div>
 
-        <a href="/new">Make a Post</a>
-    <% }else{ %>
-        No Post Avilable!
-        <a href="/new">Make a Post</a>
+    <% } else { %>
+      <div class="posts-container">
+        <div class="empty-hall">
+          <p>The Great Hall is silent — no dispatches have been posted.</p>
+          <a href="/new" class="action-link primary" style="display:inline-block;">+ Send First Dispatch</a>
+        </div>
+      </div>
     <% } %>
-    <a href="/user/logout">Log out</a>
+
+  </div>
+
 </body>
 </html>

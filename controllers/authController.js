@@ -20,7 +20,7 @@ const logInGET = (req, res) => {
     res.render('login', { title: 'Log In', formData: {}});
 }
 
-const loginPOST = passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: '/new'});
+const loginPOST = passport.authenticate('local', { failureRedirect: '/login-failed-tryagin', successRedirect: '/'});
 
 const joinClubGET = (req, res) => {
     res.render('clubjoin', { title: 'Join Club', formData: {}});
